@@ -60,7 +60,7 @@ class ProductionPlanData:
             self.powerplants.append(PowerPlant(powerplant_data=powerplant_data))
         self.compute_plan()
 
-    def get_max_power_output(self, plant: PowerPlant):
+    def get_max_power_output(self, plant: PowerPlant) -> float:
         if plant.type == "windturbine":
             return self.fuels.wind * plant.pmax / 100
         else:

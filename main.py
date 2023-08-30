@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 
-from database import ProductionPlanData, PowerPlant
-
+from database import ProductionPlanData
 
 web_api = Flask(__name__)
 
