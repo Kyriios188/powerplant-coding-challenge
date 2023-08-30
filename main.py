@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 
 from database import ProductionPlanData, PowerPlant
 
@@ -10,7 +10,7 @@ web_api = Flask(__name__)
 def productionplan():
     if request.method == 'POST':
         plan: ProductionPlanData = ProductionPlanData(request.json)
-        return "200"
+        return jsonify(plan.export_plan())
 
 
 if __name__ == '__main__':

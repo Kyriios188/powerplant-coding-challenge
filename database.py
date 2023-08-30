@@ -21,6 +21,9 @@ class PowerPlant:
 
         self.contribution = None
 
+    def __str__(self):
+        return self.name
+
 
 @dataclass
 class Fuels:
@@ -91,6 +94,17 @@ class ProductionPlanData:
             # it will use an equivalent in fuel of 460MWh / 0.53 = 867.9MWh
             return getattr(self.fuels, fuel_type) * power / plant.efficiency if plant.efficiency != 0 else sys.maxsize
 
+    def export_plan(self) -> list[dict]:
+        """Desired output is a list of 2 key-value pairs"""
+
+        output: list[dict] = []
+        for plant in self.powerplants:
+            output.append({
+                "name": plant.name,
+                "p": plant.contribution or 0.0  # contribution can be None
+            })
+        return output
+
     def compute_plan(self) -> None:
         """
         Iterates over the list of PowerPlants to find the cheapest combination of power they can contribute.
@@ -105,8 +119,7 @@ class ProductionPlanData:
         # list of plants that can be reevaluated, the first plant being the cheapest
         can_be_reevaluated: list[PowerPlant] = []
         # list of plants that have not contributed yet
-        can_contribute: list[PowerPlant] = sorted_plants[:]
-
+        can_contribute: list[PowerPlant] = sorted_plants
         remaining_load: float = self.load
 
         while remaining_load != 0 and can_contribute != []:
