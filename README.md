@@ -3,6 +3,7 @@
 ## About
 
 An implementation of the powerplant coding challenge from https://github.com/gem-spaas/powerplant-coding-challenge.
+The challenge took me 3h30 to complete and does not cover all edge cases, but that's the most I can do in under 4 hours.
 
 ## Install & Run
 
